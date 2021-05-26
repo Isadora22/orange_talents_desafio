@@ -12,7 +12,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "tb_user", uniqueConstraints = {@UniqueConstraint(columnNames = "cpf")})
-public class Users {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,10 +32,10 @@ public class Users {
     @NotNull
     private Date dataNascimento;
 
-    public Users() {
+    public User() {
     }
 
-    public Users(Long id, String nome, String email, String cpf, Date dataNascimento) {
+    public User(Long id, String nome, String email, String cpf, Date dataNascimento) {
         this.id = id;
         this.nome = nome;
         this.email = email;

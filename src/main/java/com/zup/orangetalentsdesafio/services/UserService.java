@@ -1,8 +1,8 @@
 package com.zup.orangetalentsdesafio.services;
 
 import com.zup.orangetalentsdesafio.config.UserResponse;
-import com.zup.orangetalentsdesafio.entities.Users;
-import com.zup.orangetalentsdesafio.repositories.UsersRepository;
+import com.zup.orangetalentsdesafio.entities.User;
+import com.zup.orangetalentsdesafio.repositories.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,18 +11,18 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UsersService {
+public class UserService {
 
     @Autowired
-    private UsersRepository usersRepository;
+    private UserRepository userRepository;
 
-    public List<Users> listarTodos() {
-        return usersRepository.findAll();
+    public List<User> listarTodos() {
+        return userRepository.findAll();
     }
 
-    public Optional<Users> cadastrar(Users user) {
-        Optional<Users> cpf = usersRepository.findByCpf(user.getCpf());
-        Optional<Users> email = usersRepository.findByEmail(user.getEmail());
+    public Optional<User> cadastrar(User user) {
+        Optional<User> cpf = userRepository.findByCpf(user.getCpf());
+        Optional<User> email = userRepository.findByEmail(user.getEmail());
 
         UserResponse userResponse = new UserResponse();
 
@@ -33,7 +33,7 @@ public class UsersService {
 
             return Optional.empty();
         }
-        return Optional.ofNullable(usersRepository.save(user));
+        return Optional.ofNullable(userRepository.save(user));
     }
 
 }

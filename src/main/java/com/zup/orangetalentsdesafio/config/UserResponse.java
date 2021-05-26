@@ -1,26 +1,26 @@
 package com.zup.orangetalentsdesafio.config;
 
-import com.zup.orangetalentsdesafio.entities.Users;
+import com.zup.orangetalentsdesafio.entities.User;
 
 public class UserResponse {
 
-    private Users users;
+    private User user;
     private String mensagem;
 
     public UserResponse() {
     }
 
-    public UserResponse(Users users, String mensagem) {
-        this.users = users;
+    public UserResponse(User user, String mensagem) {
+        this.user = user;
         this.mensagem = mensagem;
     }
 
-    public Users getUsers() {
-        return users;
+    public User getUsers() {
+        return user;
     }
 
-    public void setUsers(Users users) {
-        this.users = users;
+    public void setUsers(User user) {
+        this.user = user;
     }
 
     public String getMensagem() {
