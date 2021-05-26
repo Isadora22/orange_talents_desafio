@@ -1,31 +1,41 @@
 package com.zup.orangetalentsdesafio.entities;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import org.hibernate.validator.constraints.br.CPF;
 
-import javax.persistence.Entity;
-import javax.persistence.GenerationType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import java.util.Date;
 
 @Entity
-@Table(name = "tb_user")
-public class User {
+@Table(name = "tb_user", uniqueConstraints = {@UniqueConstraint(columnNames = "cpf")})
+public class Users {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotNull
     private String nome;
+
+    @Email(message = "E-mail inválido")
+    @Column(unique = true, nullable = false)
     private String email;
+
+    @CPF(message =  "CPF inválido")
+    @Column(unique = true, nullable = false)
     private String cpf;
+
+    @NotNull
     private Date dataNascimento;
 
-    public User() {
+    public Users() {
     }
 
-    public User(Long id, String nome, String email, String cpf, Date dataNascimento) {
+    public Users(Long id, String nome, String email, String cpf, Date dataNascimento) {
         this.id = id;
         this.nome = nome;
         this.email = email;
