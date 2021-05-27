@@ -25,8 +25,8 @@ public class UserController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<User> cadastrar(@Valid @RequestBody User user) {
-        Optional<User> usuarioExistente = userService.cadastrar(user);
+    public ResponseEntity<User> cadastrar(@Valid @RequestBody User user, @PathVariable Long vehicleId) {
+        Optional<User> usuarioExistente = userService.cadastrar(user, vehicleId);
 
         if(usuarioExistente.isEmpty()) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();

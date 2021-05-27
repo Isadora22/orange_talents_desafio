@@ -1,14 +1,14 @@
 package com.zup.orangetalentsdesafio.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.validator.constraints.br.CPF;
 
 import javax.persistence.*;
-
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "tb_user", uniqueConstraints = {@UniqueConstraint(columnNames = "cpf")})
@@ -31,6 +31,11 @@ public class User {
 
     @NotNull
     private Date dataNascimento;
+
+    @ManyToOne
+    @JoinColumn(name = "vehicle")
+    @JsonIgnoreProperties("users")
+    private Vehicle vehicle;
 
     public User() {
     }
@@ -81,6 +86,14 @@ public class User {
 
     public void setDataNascimento(Date dataNascimento) {
         this.dataNascimento = dataNascimento;
+    }
+
+    public Vehicle getVehicle() {
+        return vehicle;
+    }
+
+    public void setVehicle(Vehicle vehicle) {
+        this.vehicle = vehicle;
     }
 
     @Override
