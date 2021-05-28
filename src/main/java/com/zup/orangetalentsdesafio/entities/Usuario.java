@@ -1,18 +1,19 @@
 package com.zup.orangetalentsdesafio.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.br.CPF;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Entity
 @Table(name = "tb_user", uniqueConstraints = {@UniqueConstraint(columnNames = "cpf")})
-public class User {
+public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,15 +33,14 @@ public class User {
     @NotNull
     private Date dataNascimento;
 
-    @ManyToOne
-    @JoinColumn(name = "vehicle")
-    @JsonIgnoreProperties("users")
-    private Vehicle vehicle;
+    @JsonIgnore
+    @OneToMany(mappedBy = "usuario")
+    private List<Veiculo> veiculos = new ArrayList<>();
 
-    public User() {
+    public Usuario() {
     }
 
-    public User(Long id, String nome, String email, String cpf, Date dataNascimento) {
+    public Usuario(Long id, String nome, String email, String cpf, Date dataNascimento) {
         this.id = id;
         this.nome = nome;
         this.email = email;
@@ -88,22 +88,15 @@ public class User {
         this.dataNascimento = dataNascimento;
     }
 
-    public Vehicle getVehicle() {
-        return vehicle;
-    }
-
-    public void setVehicle(Vehicle vehicle) {
-        this.vehicle = vehicle;
-    }
-
     @Override
     public String toString() {
-        return "User{" +
+        return "Usuario{" +
                 "id=" + id +
                 ", nome='" + nome + '\'' +
                 ", email='" + email + '\'' +
                 ", cpf='" + cpf + '\'' +
                 ", dataNascimento=" + dataNascimento +
+                ", veiculos=" + veiculos +
                 '}';
     }
 }

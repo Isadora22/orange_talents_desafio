@@ -1,6 +1,6 @@
 package com.zup.orangetalentsdesafio.entities.enums;
 
-public enum TypeVehicle {
+public enum TipoVeiculo {
 
     CARRO,
     MOTO,

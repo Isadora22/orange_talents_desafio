@@ -1,32 +1,25 @@
 package com.zup.orangetalentsdesafio.controllers;
 
-import com.zup.orangetalentsdesafio.entities.User;
-import com.zup.orangetalentsdesafio.services.UserService;
+import com.zup.orangetalentsdesafio.entities.Usuario;
+import com.zup.orangetalentsdesafio.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/users")
-public class UserController {
+@RequestMapping("/usuarios")
+public class UsuarioController {
 
     @Autowired
-    private UserService userService;
-
-    @GetMapping("/all")
-    public ResponseEntity<List<User>> listarTodos() {
-        List<User> list = userService.listarTodos();
-        return new ResponseEntity<>(list, HttpStatus.OK);
-    }
+    private UsuarioService usuarioService;
 
     @PostMapping("/add")
-    public ResponseEntity<User> cadastrar(@Valid @RequestBody User user, @PathVariable Long vehicleId) {
-        Optional<User> usuarioExistente = userService.cadastrar(user, vehicleId);
+    public ResponseEntity<Usuario> cadastrar(@Valid @RequestBody Usuario usuario) {
+        Optional<Usuario> usuarioExistente = usuarioService.cadastrar(usuario);
 
         if(usuarioExistente.isEmpty()) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
