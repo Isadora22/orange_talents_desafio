@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/veiculos")
@@ -29,8 +30,13 @@ public class VeiculoController {
     public ResponseEntity<Veiculo> addVehicle(@RequestBody Veiculo veiculo) throws MarcaNotFoundException,
             ModeloNotFoundException, AnoNotFoundException {
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(veiculoService.cadastrar(veiculo, veiculo.getUsuario().getId()));
+        Optional<Veiculo> nvVeiculo = veiculoService.cadastrar(veiculo, veiculo.getUsuario().getId());
+
+        if(nvVeiculo.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+        else {
+            return ResponseEntity.status(HttpStatus.CREATED).body(nvVeiculo.get());
+        }
     }
-
-
 }

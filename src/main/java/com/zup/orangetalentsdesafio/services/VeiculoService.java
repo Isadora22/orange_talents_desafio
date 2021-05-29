@@ -40,7 +40,7 @@ public class VeiculoService {
         return veiculoRepository.findAll();
     }
 
-    public Veiculo cadastrar(Veiculo veiculo, Long usuarioId) throws MarcaNotFoundException,
+    public Optional<Veiculo> cadastrar(Veiculo veiculo, Long usuarioId) throws MarcaNotFoundException,
             ModeloNotFoundException, AnoNotFoundException {
         Optional<Usuario> usuarioExiste = usuarioRepository.findById(usuarioId);
 
@@ -73,7 +73,7 @@ public class VeiculoService {
         usuario.setId(usuarioId);
 
         veiculo.setUsuario(usuario);
-        return veiculoRepository.save(veiculo);
+        return Optional.ofNullable(veiculoRepository.save(veiculo));
     }
 
     private void setInfoRodizioVeiculo(Veiculo veiculo) {
