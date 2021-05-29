@@ -1,6 +1,5 @@
 package com.zup.orangetalentsdesafio.config;
 
-import com.zup.orangetalentsdesafio.entities.Veiculo;
 import com.zup.orangetalentsdesafio.entities.models.Ano;
 import com.zup.orangetalentsdesafio.entities.models.Marca;
 import com.zup.orangetalentsdesafio.entities.models.Modelo;
