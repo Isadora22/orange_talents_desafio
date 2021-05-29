@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -16,6 +17,12 @@ public class UsuarioController {
 
     @Autowired
     private UsuarioService usuarioService;
+
+    @GetMapping("/all")
+    public ResponseEntity<List<Usuario>> listarTodos() {
+        List<Usuario> list = usuarioService.listarTodos();
+        return new ResponseEntity<>(list, HttpStatus.OK);
+    }
 
     @PostMapping("/add")
     public ResponseEntity<Usuario> cadastrar(@Valid @RequestBody Usuario usuario) {

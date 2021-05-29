@@ -10,12 +10,14 @@ import com.zup.orangetalentsdesafio.entities.models.VeiculoDetalhe;
 import com.zup.orangetalentsdesafio.exceptions.AnoNotFoundException;
 import com.zup.orangetalentsdesafio.exceptions.MarcaNotFoundException;
 import com.zup.orangetalentsdesafio.exceptions.ModeloNotFoundException;
+import com.zup.orangetalentsdesafio.repositories.UsuarioRepository;
 import com.zup.orangetalentsdesafio.repositories.VeiculoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.DateFormatSymbols;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -29,10 +31,19 @@ public class VeiculoService {
     private VeiculoRepository veiculoRepository;
 
     @Autowired
+    private UsuarioRepository usuarioRepository;
+
+    @Autowired
     private FIPEClient fipeClient;
 
-    public Optional<Veiculo> cadastrar(Veiculo veiculo, Long id) throws MarcaNotFoundException,
+    public List<Veiculo> listarTodos() {
+        return veiculoRepository.findAll();
+    }
+
+    public Veiculo cadastrar(Veiculo veiculo, Long usuarioId) throws MarcaNotFoundException,
             ModeloNotFoundException, AnoNotFoundException {
+        Optional<Usuario> usuarioExiste = usuarioRepository.findById(usuarioId);
+
         Marca marcas = fipeClient.getMarcas()
                                  .stream()
                                  .filter(ma -> ma.getNome().equalsIgnoreCase(veiculo.getMarca()))
@@ -59,10 +70,10 @@ public class VeiculoService {
         setInfoRodizioVeiculo(veiculo);
 
         Usuario usuario = new Usuario();
-        usuario.setId(id);
+        usuario.setId(usuarioId);
 
         veiculo.setUsuario(usuario);
-        return Optional.ofNullable(veiculoRepository.save(veiculo));
+        return veiculoRepository.save(veiculo);
     }
 
     private void setInfoRodizioVeiculo(Veiculo veiculo) {

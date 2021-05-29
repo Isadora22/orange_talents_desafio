@@ -1,11 +1,17 @@
 package com.zup.orangetalentsdesafio.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
 @Table(name = "tb_vehicle")
-public class Veiculo {
+public class Veiculo implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,7 +35,7 @@ public class Veiculo {
     @NotNull
     private Boolean rodizioAtivo = false;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Usuario.class)
     @JoinColumn(name = "usuario_id", nullable = false)
     private Usuario usuario;
 
@@ -111,14 +117,4 @@ public class Veiculo {
         this.usuario = usuario;
     }
 
-    @Override
-    public String toString() {
-        return "Veiculo{" +
-                "id=" + id +
-                ", marca='" + marca + '\'' +
-                ", modelo='" + modelo + '\'' +
-                ", ano='" + ano + '\'' +
-                ", usuario=" + usuario +
-                '}';
-    }
 }

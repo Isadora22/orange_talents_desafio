@@ -1,19 +1,25 @@
 package com.zup.orangetalentsdesafio.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.validator.constraints.br.CPF;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
 @Table(name = "tb_user", uniqueConstraints = {@UniqueConstraint(columnNames = "cpf")})
-public class Usuario {
+public class Usuario implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,8 +39,8 @@ public class Usuario {
     @NotNull
     private Date dataNascimento;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "usuario")
+    @JsonManagedReference
     private List<Veiculo> veiculos = new ArrayList<>();
 
     public Usuario() {
@@ -88,15 +94,4 @@ public class Usuario {
         this.dataNascimento = dataNascimento;
     }
 
-    @Override
-    public String toString() {
-        return "Usuario{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", email='" + email + '\'' +
-                ", cpf='" + cpf + '\'' +
-                ", dataNascimento=" + dataNascimento +
-                ", veiculos=" + veiculos +
-                '}';
-    }
 }
