@@ -4,7 +4,6 @@ import com.zup.orangetalentsdesafio.config.UsuarioResponse;
 import com.zup.orangetalentsdesafio.entities.Usuario;
 import com.zup.orangetalentsdesafio.repositories.UsuarioRepository;
 
-import com.zup.orangetalentsdesafio.repositories.VeiculoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,13 +15,6 @@ public class UsuarioService {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
-
-    @Autowired
-    private VeiculoRepository veiculoRepository;
-
-    public List<Usuario> listarTodos() {
-        return usuarioRepository.findAll();
-    }
 
     public Optional<Usuario> cadastrar(Usuario usuario) {
         Optional<Usuario> cpf = usuarioRepository.findByCpf(usuario.getCpf());
@@ -39,5 +31,7 @@ public class UsuarioService {
 
         return Optional.ofNullable(usuarioRepository.save(usuario));
     }
-
 }
+
+
+

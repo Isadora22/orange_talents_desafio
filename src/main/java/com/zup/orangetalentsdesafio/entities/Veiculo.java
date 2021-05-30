@@ -10,9 +10,7 @@ import java.io.Serializable;
 @Entity
 @Table(name = "tb_vehicle")
 public class Veiculo implements Serializable {
-
     private static final long serialVersionUID = 1L;
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -29,13 +27,11 @@ public class Veiculo implements Serializable {
     @NotNull
     private String valor;
 
-    @NotNull
     private String diaRodizio;
 
-    @NotNull
     private Boolean rodizioAtivo = false;
 
-    @ManyToOne(fetch = FetchType.LAZY, targetEntity = Usuario.class)
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Usuario.class)
     @JoinColumn(name = "usuario_id", nullable = false)
     private Usuario usuario;
 

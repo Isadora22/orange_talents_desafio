@@ -29,7 +29,6 @@ public class VeiculoController {
     @PostMapping("/add")
     public ResponseEntity<Veiculo> addVehicle(@RequestBody Veiculo veiculo) throws MarcaNotFoundException,
             ModeloNotFoundException, AnoNotFoundException {
-
         Optional<Veiculo> nvVeiculo = veiculoService.cadastrar(veiculo, veiculo.getUsuario().getId());
 
         if(nvVeiculo.isEmpty()) {
@@ -40,3 +39,5 @@ public class VeiculoController {
         }
     }
 }
+
+

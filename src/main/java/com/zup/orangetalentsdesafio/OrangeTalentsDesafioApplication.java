@@ -11,5 +11,4 @@ public class OrangeTalentsDesafioApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(OrangeTalentsDesafioApplication.class, args);
 	}
-
 }

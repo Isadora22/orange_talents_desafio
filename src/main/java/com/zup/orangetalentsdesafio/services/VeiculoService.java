@@ -22,17 +22,14 @@ import java.util.Optional;
 
 @Service
 public class VeiculoService {
-
     public static String getDiaSemana(){
         return new DateFormatSymbols().getWeekdays()[Calendar.getInstance().get(Calendar.DAY_OF_WEEK)];
     }
 
     @Autowired
     private VeiculoRepository veiculoRepository;
-
     @Autowired
     private UsuarioRepository usuarioRepository;
-
     @Autowired
     private FIPEClient fipeClient;
 

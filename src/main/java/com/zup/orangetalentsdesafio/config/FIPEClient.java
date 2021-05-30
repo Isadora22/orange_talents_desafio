@@ -26,3 +26,5 @@ public interface FIPEClient {
     VeiculoDetalhe getVeiculoDetalhe(@PathVariable String codigoMarca, @PathVariable Integer codigoModelo, @PathVariable String ano);
 
 }
+
+

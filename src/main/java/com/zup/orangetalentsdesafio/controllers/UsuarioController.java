@@ -18,12 +18,6 @@ public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
 
-    @GetMapping("/all")
-    public ResponseEntity<List<Usuario>> listarTodos() {
-        List<Usuario> list = usuarioService.listarTodos();
-        return new ResponseEntity<>(list, HttpStatus.OK);
-    }
-
     @PostMapping("/add")
     public ResponseEntity<Usuario> cadastrar(@Valid @RequestBody Usuario usuario) {
         Optional<Usuario> usuarioExistente = usuarioService.cadastrar(usuario);
@@ -35,5 +29,6 @@ public class UsuarioController {
             return ResponseEntity.status(HttpStatus.CREATED).body(usuarioExistente.get());
         }
     }
-
 }
+
+

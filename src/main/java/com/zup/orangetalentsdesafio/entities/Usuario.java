@@ -12,13 +12,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
-@Table(name = "tb_user", uniqueConstraints = {@UniqueConstraint(columnNames = "cpf")})
+@Table(name = "tb_user", uniqueConstraints = {@UniqueConstraint(columnNames = {"email","cpf"})})
 public class Usuario implements Serializable {
-
     private static final long serialVersionUID = 1L;
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

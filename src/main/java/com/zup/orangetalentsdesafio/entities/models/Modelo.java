@@ -3,7 +3,6 @@ package com.zup.orangetalentsdesafio.entities.models;
 import java.util.List;
 
 public class Modelo {
-
     private List<Modelos> modelos;
 
     public Modelo() {
@@ -50,3 +49,6 @@ public class Modelo {
         }
     }
 }
+
+
+
